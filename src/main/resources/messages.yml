@@ -1,0 +1,39 @@
+Authentication:
+  Commands:
+    AcceptCommand: "&aWelcome"
+    AlreadyAccepted: "&aYou have already accepted!"
+    DenyCommand: "&cRules Denied"
+    Kick: "&cServer Rules Denied, You are not Welcome Here!"
+  Events:
+    PlayerJoin: "&cYou Must /Accept Rules to"
+    WelcomeAccepted: "&aWelcome Back!"
+    WelcomeNotAccepted: "&aWelcome to Server!"
+    OverrideEventMessage: "&cYou Must /Accept Rules"
+    BlockPlace: "&cYou Must /Accept Rules to Place Blocks"
+    BlockBreak: "&cYou Must /Accept Rules to Break Blocks"
+    ItemPickup: "&cYou Must /Accept Rules to Pickup Items"
+    ItemDrop: "&cYou Must /Accept Rules to Drop Items"
+    InteractEntities: "&cYou Must /Accept Rules to Interact with Entities"
+    Interact: "&cYou Must /Accept Rules to Interact"
+    Attack: "&cYou Must /Accept Rules to Attack"
+    Damage: "&cYou Must /Accept Rules to Damage"
+    Command: "&cYou Must /Accept Rules to run Commands"
+    Chat: "&cYou Must /Accept Rules to Chat"
+  Rules:
+    Page1:
+      - "&e-----===== &2Rules &e=====-----"
+      - "&2Rules Go Here"
+      - "&2Doesn't Matter How Many"
+      - "&2Line you create :D"
+      - "&bUse &8Minecraft &ccolor &6codes"
+    Page2:
+      - "&aRules Page2"
+  Info:
+    Page1:
+      - "&e-----===== &2Info &e=====-----"
+      - "&2Server Info Can go Here"
+      - "&2Doesn't Matter How Many"
+      - "&2Line you create :D"
+      - "&bUse &8Minecraft &ccolor &6codes"
+    Page2:
+      - "&aInfo Page2"

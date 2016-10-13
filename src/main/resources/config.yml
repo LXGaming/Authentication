@@ -1,0 +1,43 @@
+Authentication:
+  Commands:
+    AcceptCommand:
+    DenyCommand:
+      Kick: true
+      MessageBeforeKick: true
+      KickDelay: 100
+  Events:
+    RulesMessage: true
+    OverrideEventMessage: false
+    EventMessage: true
+    PlayerJoin:
+      RulesAccepted: false
+      WelcomeAccepted: true
+      RulesNotAccepted: true
+      WelcomeNotAccepted: false
+      MessageDelay: 10
+    BlockPlace: false
+    BlockBreak: false
+    ItemPickup: false
+    ItemDrop: false
+    InteractEntities: false
+    Interact: false
+    Attack: false
+    Damage: false
+    Command: false
+    Chat: false
+  CommandWhitelist:
+    - "/authentication"
+    - "/auth"
+    - "/accept"
+    - "/aaccept"
+    - "/deny"
+    - "/adeny"
+    - "/rules"
+    - "/arules"
+    - "/serverrules"
+    - "/info"
+    - "/ainfo"
+    - "/serverinfo"
+  Permissions:
+    Bypass: "Authentication.Bypass"
+# Any Issues/Improvements or Feedback Tweet @alexrobthomson

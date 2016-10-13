@@ -1,0 +1,45 @@
+name: ${project.artifactId}
+main: io.github.lxgaming.authentication.Authentication
+version: ${project.version}
+author: LX_Gaming
+website: http://www.lxgaming.github.io
+commands:
+  authentication:
+    description: List Commands.
+    usage: /<command>
+  auth:
+    description: List Commands.
+    usage: /<command>
+  accept:
+    description: Accept server rules or terms.
+    usage: /<command>
+  aaccept:
+    description: Accept server rules or terms.
+    usage: /<command>
+  deny:
+    description: Deny server rules or terms.
+    usage: /<command>
+  adeny:
+    description: Accept server rules or terms.
+    usage: /<command>
+  rules:
+    description: Shows server rules.
+    usage: /<command>
+  arules:
+    description: Shows server rules.
+    usage: /<command>
+  serverrules:
+    description: Shows server rules.
+    usage: /<command>
+  info:
+    description: Shows server info.
+    usage: /<command>
+  ainfo:
+    description: Shows server info.
+    usage: /<command>
+  serverinfo:
+    description: Shows server info.
+    usage: /<command>
+permissions:
+  Authentication.Bypass:
+    description: Auto Accepts.
