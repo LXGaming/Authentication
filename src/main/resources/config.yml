@@ -40,4 +40,3 @@ Authentication:
     - "/serverinfo"
   Permissions:
     Bypass: "Authentication.Bypass"
-# Any Issues/Improvements or Feedback Tweet @alexrobthomson

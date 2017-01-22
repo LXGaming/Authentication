@@ -1,6 +1,6 @@
-name: ${project.artifactId}
+name: ${name}
 main: io.github.lxgaming.authentication.Authentication
-version: ${project.version}
+version: ${version}
 author: LX_Gaming
 website: http://www.lxgaming.github.io
 commands:

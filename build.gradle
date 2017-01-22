@@ -4,7 +4,7 @@ apply plugin: "java"
 targetCompatibility = 1.8
 sourceCompatibility = 1.8
 
-version = "0.2.5"
+version = "1.0.0"
 group = "io.github.lxgaming.authentication"
 archivesBaseName = "Authentication"
 
@@ -39,5 +39,15 @@ jar {
   }
   from {
     ["LICENSE"]
+  }
+}
+
+processResources {
+  inputs.property "archivesBaseName", project.archivesBaseName
+  inputs.property "version", project.version
+  
+  from (sourceSets.main.resources.srcDirs) {
+    include "plugin.yml"
+    expand "name":project.archivesBaseName, "version":project.version
   }
 }
