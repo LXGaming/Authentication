@@ -1,53 +1,68 @@
-apply from: "../.gradle/sign.gradle"
 apply plugin: "java"
+
+def signFile = "../.gradle/sign.gradle"
+if (file(signFile).exists()) {
+    apply from: signFile
+}
 
 targetCompatibility = 1.8
 sourceCompatibility = 1.8
 
-version = "1.0.0"
 group = "io.github.lxgaming.authentication"
 archivesBaseName = "Authentication"
+version = "1.0.0"
 
 configurations {
-  provided {
-    compile.extendsFrom(provided)
-  }
-  build {
-    finalizedBy(signJar)
-  }
+    provided {
+        compile.extendsFrom(provided)
+    }
+
+    build {
+        if (project.tasks.findByName("signJar")) {
+            return finalizedBy(signJar)
+        }
+
+        return doLast {
+            println("========== [WARNING] ==========")
+            println()
+            println("   This build is not signed!   ")
+            println()
+            println("========== [WARNING] ==========")
+        }
+    }
 }
 
 repositories {
-  mavenCentral()
-  maven {
-    url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
-  }
-  maven {
-    url "https://oss.sonatype.org/content/repositories/snapshots/"
-  }
+    mavenCentral()
+    maven {
+        url("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
+    }
+    maven {
+        url("https://oss.sonatype.org/content/repositories/snapshots/")
+    }
 }
 
 dependencies {
-  provided "org.spigotmc:spigot-api:1.11.2-R0.1-SNAPSHOT"
+    provided("org.spigotmc:spigot-api:1.11.2-R0.1-SNAPSHOT")
 }
 
 jar {
-  from {
-    (configurations.compile - configurations.provided).collect {
-	  it.isDirectory() ? it : zipTree(it)
-	}
-  }
-  from {
-    ["LICENSE"]
-  }
+    from {
+        (configurations.compile - configurations.provided).collect {
+            if (it.isDirectory()) {
+                return it
+            }
+            return zipTree(it)
+        }
+    }
 }
 
 processResources {
-  inputs.property "archivesBaseName", project.archivesBaseName
-  inputs.property "version", project.version
-  
-  from (sourceSets.main.resources.srcDirs) {
-    include "plugin.yml"
-    expand "name":project.archivesBaseName, "version":project.version
-  }
+    from("LICENSE")
+    rename("LICENSE", "LICENSE-" + archivesBaseName)
+
+    from (sourceSets.main.resources.srcDirs) {
+        include("plugin.yml")
+        expand("name":archivesBaseName, "version":version)
+    }
 }
