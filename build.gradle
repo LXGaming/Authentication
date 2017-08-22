@@ -8,7 +8,7 @@ if (file(signFile).exists()) {
 targetCompatibility = 1.8
 sourceCompatibility = 1.8
 
-group = "io.github.lxgaming.authentication"
+group = "io.github.lxgaming"
 archivesBaseName = "Authentication"
 version = "1.0.0"
 
