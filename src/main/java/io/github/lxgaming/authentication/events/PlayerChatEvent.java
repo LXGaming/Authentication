@@ -18,6 +18,7 @@ package io.github.lxgaming.authentication.events;
 
 import io.github.lxgaming.authentication.Authentication;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -33,7 +34,7 @@ public class PlayerChatEvent implements Listener {
             if (!Authentication.instance.hasPlayerAccepted(player)) {
                 event.setCancelled(true);
                 if (Authentication.config.getBoolean("Authentication.Events.RulesMessage")) {
-                    player.performCommand("serverrules");
+                    Bukkit.getScheduler().runTask(Authentication.instance, () -> player.performCommand("serverrules"));
                 }
                 
                 if (Authentication.config.getBoolean("Authentication.Events.OverrideEventMessage")) {

@@ -28,7 +28,7 @@ public class AuthenticationCommand implements CommandExecutor {
         if (cmd.getName().equalsIgnoreCase("authentication") || cmd.getName().equalsIgnoreCase("auth") && sender instanceof Player) {
             Player player = (Player) sender;
             player.sendMessage(ChatColor.GOLD + "===== " + ChatColor.GREEN + "Authentication" + ChatColor.GOLD + " ===== ");
-            player.sendMessage(ChatColor.GOLD + "- " + ChatColor.AQUA + "Version 0.2.5");
+            player.sendMessage(ChatColor.GOLD + "- " + ChatColor.AQUA + "Version 1.0.1");
             player.sendMessage(ChatColor.GOLD + "===== " + ChatColor.GREEN + "Commands" + ChatColor.GOLD + " ===== ");
             player.sendMessage(ChatColor.GOLD + "- " + ChatColor.AQUA + "Authentication / Auth");
             player.sendMessage(ChatColor.GOLD + "- " + ChatColor.AQUA + "Accept / AAccept");

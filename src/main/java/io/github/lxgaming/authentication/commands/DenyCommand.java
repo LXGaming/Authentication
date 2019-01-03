@@ -54,10 +54,8 @@ public class DenyCommand implements CommandExecutor {
             if (Authentication.config.getBoolean("Authentication.Commands.DenyCommand.Kick")) {
                 if (Authentication.config.getBoolean("Authentication.Commands.DenyCommand.MessageBeforeKick")) {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Commands.DenyCommand")));
-                    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Authentication.instance, new Runnable() {
-                        public void run() {
-                            player.kickPlayer(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Commands.Kick")));
-                        }
+                    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Authentication.instance, () -> {
+                        player.kickPlayer(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Commands.Kick")));
                     }, Delay);
                     
                     return true;

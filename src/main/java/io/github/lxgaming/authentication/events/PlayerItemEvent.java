@@ -21,8 +21,8 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
 
 public class PlayerItemEvent implements Listener {
     
@@ -48,8 +48,12 @@ public class PlayerItemEvent implements Listener {
     }
     
     @EventHandler
-    public void onPlayerPickupItem(PlayerPickupItemEvent event) {
-        Player player = event.getPlayer();
+    public void onPlayerPickupItem(EntityPickupItemEvent event) {
+        if (!(event.getEntity() instanceof Player)) {
+            return;
+        }
+        
+        Player player = (Player) event.getEntity();
         if (!Authentication.config.getBoolean("Authentication.Events.ItemPickup")) {
             if (!Authentication.instance.hasPlayerAccepted(player)) {
                 event.setCancelled(true);
