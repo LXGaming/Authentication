@@ -38,12 +38,14 @@ public class AcceptCommand implements CommandExecutor {
                 List<String> list = Authentication.database.getStringList("Authentication.Database");
                 list.add(name);
                 Authentication.database.set("Authentication.Database", list);
+                
                 try {
                     Authentication.database.save(Authentication.databaseFile);
                     Authentication.instance.getLogger().info(name + " Was added to the Database");
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
+                
                 Authentication.instance.reloadConfig();
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Commands.AcceptCommand")));
                 return true;
@@ -52,6 +54,7 @@ public class AcceptCommand implements CommandExecutor {
                 return true;
             }
         }
+        
         return false;
     }
 }

@@ -35,15 +35,18 @@ public class RulesCommand implements CommandExecutor {
                 for (String rule : rules) {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', rule));
                 }
+                
                 return true;
             } else {
                 List<String> rules = Authentication.messages.getStringList("Authentication.Rules.Page1");
                 for (String rule : rules) {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', rule));
                 }
+                
                 return true;
             }
         }
+        
         return false;
     }
 }

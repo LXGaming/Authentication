@@ -27,19 +27,20 @@ import org.bukkit.event.player.PlayerPickupItemEvent;
 public class PlayerItemEvent implements Listener {
     
     @EventHandler
-    public void onPlayerDropItem(PlayerDropItemEvent PDI) {
-        Player PDIP = PDI.getPlayer();
-        if (!Authentication.config.getBoolean("Authentication.Events.ItemDrop") == true) {
-            if (!Authentication.instance.hasPlayerAccepted(PDIP)) {
-                PDI.setCancelled(true);
-                if (Authentication.config.getBoolean("Authentication.Events.RulesMessage") == true) {
-                    PDIP.performCommand("serverrules");
+    public void onPlayerDropItem(PlayerDropItemEvent event) {
+        Player player = event.getPlayer();
+        if (!Authentication.config.getBoolean("Authentication.Events.ItemDrop")) {
+            if (!Authentication.instance.hasPlayerAccepted(player)) {
+                event.setCancelled(true);
+                if (Authentication.config.getBoolean("Authentication.Events.RulesMessage")) {
+                    player.performCommand("serverrules");
                 }
-                if (Authentication.config.getBoolean("Authentication.Events.OverrideEventMessage") == true) {
-                    PDIP.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.OverrideEventMessage")));
+                
+                if (Authentication.config.getBoolean("Authentication.Events.OverrideEventMessage")) {
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.OverrideEventMessage")));
                 } else {
-                    if (Authentication.config.getBoolean("Authentication.Events.EventMessage") == true) {
-                        PDIP.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.ItemDrop")));
+                    if (Authentication.config.getBoolean("Authentication.Events.EventMessage")) {
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.ItemDrop")));
                     }
                 }
             }
@@ -47,19 +48,20 @@ public class PlayerItemEvent implements Listener {
     }
     
     @EventHandler
-    public void onPlayerPickupItem(PlayerPickupItemEvent PPI) {
-        Player PPIP = PPI.getPlayer();
-        if (!Authentication.config.getBoolean("Authentication.Events.ItemPickup") == true) {
-            if (!Authentication.instance.hasPlayerAccepted(PPIP)) {
-                PPI.setCancelled(true);
-                if (Authentication.config.getBoolean("Authentication.Events.RulesMessage") == true) {
-                    PPIP.performCommand("serverrules");
+    public void onPlayerPickupItem(PlayerPickupItemEvent event) {
+        Player player = event.getPlayer();
+        if (!Authentication.config.getBoolean("Authentication.Events.ItemPickup")) {
+            if (!Authentication.instance.hasPlayerAccepted(player)) {
+                event.setCancelled(true);
+                if (Authentication.config.getBoolean("Authentication.Events.RulesMessage")) {
+                    player.performCommand("serverrules");
                 }
-                if (Authentication.config.getBoolean("Authentication.Events.OverrideEventMessage") == true) {
-                    PPIP.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.OverrideEventMessage")));
+                
+                if (Authentication.config.getBoolean("Authentication.Events.OverrideEventMessage")) {
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.OverrideEventMessage")));
                 } else {
-                    if (Authentication.config.getBoolean("Authentication.Events.EventMessage") == true) {
-                        PPIP.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.ItemPickup")));
+                    if (Authentication.config.getBoolean("Authentication.Events.EventMessage")) {
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.ItemPickup")));
                     }
                 }
             }

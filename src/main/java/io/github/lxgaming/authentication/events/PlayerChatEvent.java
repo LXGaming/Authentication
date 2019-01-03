@@ -27,19 +27,20 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 public class PlayerChatEvent implements Listener {
     
     @EventHandler
-    public void onPlayerChatEvent(AsyncPlayerChatEvent APC) {
-        Player APCP = APC.getPlayer();
-        if (!Authentication.config.getBoolean("Authentication.Events.Chat") == true) {
-            if (!Authentication.instance.hasPlayerAccepted(APCP)) {
-                APC.setCancelled(true);
-                if (Authentication.config.getBoolean("Authentication.Events.RulesMessage") == true) {
-                    APCP.performCommand("serverrules");
+    public void onPlayerChatEvent(AsyncPlayerChatEvent event) {
+        Player player = event.getPlayer();
+        if (!Authentication.config.getBoolean("Authentication.Events.Chat")) {
+            if (!Authentication.instance.hasPlayerAccepted(player)) {
+                event.setCancelled(true);
+                if (Authentication.config.getBoolean("Authentication.Events.RulesMessage")) {
+                    player.performCommand("serverrules");
                 }
-                if (Authentication.config.getBoolean("Authentication.Events.OverrideEventMessage") == true) {
-                    APCP.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.OverrideEventMessage")));
+                
+                if (Authentication.config.getBoolean("Authentication.Events.OverrideEventMessage")) {
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.OverrideEventMessage")));
                 } else {
-                    if (Authentication.config.getBoolean("Authentication.Events.EventMessage") == true) {
-                        APCP.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.Chat")));
+                    if (Authentication.config.getBoolean("Authentication.Events.EventMessage")) {
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.Chat")));
                     }
                 }
             }
@@ -47,23 +48,24 @@ public class PlayerChatEvent implements Listener {
     }
     
     @EventHandler
-    public void onCommandProcess(PlayerCommandPreprocessEvent PCP) {
-        Player PCPP = PCP.getPlayer();
-        if (!Authentication.config.getBoolean("Authentication.Events.Command") == true) {
-            if (!Authentication.instance.hasPlayerAccepted(PCPP)) {
-                for (String Command : PCP.getMessage().toLowerCase().split(" ")) {
+    public void onCommandProcess(PlayerCommandPreprocessEvent event) {
+        Player player = event.getPlayer();
+        if (!Authentication.config.getBoolean("Authentication.Events.Command")) {
+            if (!Authentication.instance.hasPlayerAccepted(player)) {
+                for (String Command : event.getMessage().toLowerCase().split(" ")) {
                     if (Authentication.config.getStringList("Authentication.CommandWhitelist").contains(Command)) {
                         return;
                     } else {
-                        PCP.setCancelled(true);
-                        if (Authentication.config.getBoolean("Authentication.Events.RulesMessage") == true) {
-                            PCPP.performCommand("serverrules");
+                        event.setCancelled(true);
+                        if (Authentication.config.getBoolean("Authentication.Events.RulesMessage")) {
+                            player.performCommand("serverrules");
                         }
-                        if (Authentication.config.getBoolean("Authentication.Events.OverrideEventMessage") == true) {
-                            PCPP.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.OverrideEventMessage")));
+                        
+                        if (Authentication.config.getBoolean("Authentication.Events.OverrideEventMessage")) {
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.OverrideEventMessage")));
                         } else {
-                            if (Authentication.config.getBoolean("Authentication.Events.EventMessage") == true) {
-                                PCPP.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.Command")));
+                            if (Authentication.config.getBoolean("Authentication.Events.EventMessage")) {
+                                player.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.Command")));
                             }
                         }
                     }

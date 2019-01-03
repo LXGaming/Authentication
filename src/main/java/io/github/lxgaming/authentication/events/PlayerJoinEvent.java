@@ -28,25 +28,26 @@ public class PlayerJoinEvent implements Listener {
     public int Delay = Authentication.config.getInt("Authentication.Events.PlayerJoin.MessageDelay");
     
     @EventHandler
-    public void onPlayerJoin(org.bukkit.event.player.PlayerJoinEvent PJ) {
-        Player PJP = PJ.getPlayer();
-        String PJPName = PJ.getPlayer().getName();
+    public void onPlayerJoin(org.bukkit.event.player.PlayerJoinEvent event) {
+        Player player = event.getPlayer();
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Authentication.instance, new Runnable() {
             public void run() {
-                if (PJP.hasPermission("Authentication.Bypass") || (PJP.isOp()) || Authentication.database.getStringList("Authentication.Database").contains(PJPName)) {
-                    Authentication.instance.setPlayerAccepted(PJP);
-                    if (Authentication.config.getBoolean("Authentication.Events.PlayerJoin.RulesAccepted") == true) {
-                        PJP.performCommand("serverrules");
+                if (player.hasPermission("Authentication.Bypass") || (player.isOp()) || Authentication.database.getStringList("Authentication.Database").contains(player.getName())) {
+                    Authentication.instance.setPlayerAccepted(player);
+                    if (Authentication.config.getBoolean("Authentication.Events.PlayerJoin.RulesAccepted")) {
+                        player.performCommand("serverrules");
                     }
-                    if (Authentication.config.getBoolean("Authentication.Events.PlayerJoin.WelcomeAccepted") == true) {
-                        PJP.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.WelcomeAccepted")));
+                    
+                    if (Authentication.config.getBoolean("Authentication.Events.PlayerJoin.WelcomeAccepted")) {
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.WelcomeAccepted")));
                     }
                 } else {
-                    if (Authentication.config.getBoolean("Authentication.Events.PlayerJoin.RulesNotAccepted") == true) {
-                        PJP.performCommand("serverrules");
+                    if (Authentication.config.getBoolean("Authentication.Events.PlayerJoin.RulesNotAccepted")) {
+                        player.performCommand("serverrules");
                     }
-                    if (Authentication.config.getBoolean("Authentication.Events.PlayerJoin.WelcomeNotAccepted") == true) {
-                        PJP.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.WelcomeNotAccepted")));
+                    
+                    if (Authentication.config.getBoolean("Authentication.Events.PlayerJoin.WelcomeNotAccepted")) {
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.WelcomeNotAccepted")));
                     }
                 }
             }

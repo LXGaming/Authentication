@@ -25,19 +25,20 @@ import org.bukkit.event.Listener;
 public class PlayerInteractEvent implements Listener {
     
     @EventHandler
-    public void onPlayerInteract(org.bukkit.event.player.PlayerInteractEvent PI) {
-        Player PIP = PI.getPlayer();
-        if (!Authentication.config.getBoolean("Authentication.Events.Interact") == true) {
-            if (!Authentication.instance.hasPlayerAccepted(PIP)) {
-                PI.setCancelled(true);
-                if (Authentication.config.getBoolean("Authentication.Events.RulesMessage") == true) {
-                    PIP.performCommand("serverrules");
+    public void onPlayerInteract(org.bukkit.event.player.PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        if (!Authentication.config.getBoolean("Authentication.Events.Interact")) {
+            if (!Authentication.instance.hasPlayerAccepted(player)) {
+                event.setCancelled(true);
+                if (Authentication.config.getBoolean("Authentication.Events.RulesMessage")) {
+                    player.performCommand("serverrules");
                 }
-                if (Authentication.config.getBoolean("Authentication.Events.OverrideEventMessage") == true) {
-                    PIP.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.OverrideEventMessage")));
+                
+                if (Authentication.config.getBoolean("Authentication.Events.OverrideEventMessage")) {
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.OverrideEventMessage")));
                 } else {
-                    if (Authentication.config.getBoolean("Authentication.Events.EventMessage") == true) {
-                        PIP.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.Interact")));
+                    if (Authentication.config.getBoolean("Authentication.Events.EventMessage")) {
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.Interact")));
                     }
                 }
             }
@@ -46,18 +47,19 @@ public class PlayerInteractEvent implements Listener {
     
     @EventHandler
     public void onPlayerInteractEntity(org.bukkit.event.player.PlayerInteractEntityEvent PIE) {
-        Player PIEP = PIE.getPlayer();
-        if (!Authentication.config.getBoolean("Authentication.Events.InteractEntities") == true) {
-            if (!Authentication.instance.hasPlayerAccepted(PIEP)) {
+        Player player = PIE.getPlayer();
+        if (!Authentication.config.getBoolean("Authentication.Events.InteractEntities")) {
+            if (!Authentication.instance.hasPlayerAccepted(player)) {
                 PIE.setCancelled(true);
-                if (Authentication.config.getBoolean("Authentication.Events.RulesMessage") == true) {
-                    PIEP.performCommand("serverrules");
+                if (Authentication.config.getBoolean("Authentication.Events.RulesMessage")) {
+                    player.performCommand("serverrules");
                 }
-                if (Authentication.config.getBoolean("Authentication.Events.OverrideEventMessage") == true) {
-                    PIEP.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.OverrideEventMessage")));
+                
+                if (Authentication.config.getBoolean("Authentication.Events.OverrideEventMessage")) {
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.OverrideEventMessage")));
                 } else {
-                    if (Authentication.config.getBoolean("Authentication.Events.EventMessage") == true) {
-                        PIEP.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.InteractEntities")));
+                    if (Authentication.config.getBoolean("Authentication.Events.EventMessage")) {
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Events.InteractEntities")));
                     }
                 }
             }

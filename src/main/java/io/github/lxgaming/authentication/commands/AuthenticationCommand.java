@@ -37,7 +37,7 @@ public class AuthenticationCommand implements CommandExecutor {
             player.sendMessage(ChatColor.GOLD + "- " + ChatColor.AQUA + "Info / AInfo /ServerInfo");
             return true;
         }
+        
         return false;
     }
-    
 }

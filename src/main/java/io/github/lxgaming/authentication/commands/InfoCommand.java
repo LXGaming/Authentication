@@ -35,15 +35,18 @@ public class InfoCommand implements CommandExecutor {
                 for (String info : infos) {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', info));
                 }
+                
                 return true;
             } else {
                 List<String> infos = Authentication.messages.getStringList("Authentication.Info.Page1");
                 for (String info : infos) {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', info));
                 }
+                
                 return true;
             }
         }
+        
         return false;
     }
 }

@@ -41,22 +41,25 @@ public class DenyCommand implements CommandExecutor {
             List<String> list = Authentication.database.getStringList("Authentication.Database");
             list.remove(name);
             Authentication.database.set("Authentication.Database", list);
+            
             try {
                 Authentication.database.save(Authentication.databaseFile);
                 Authentication.instance.getLogger().info(name + " Was removed from the Database");
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+            
             Authentication.instance.reloadConfig();
             
-            if (Authentication.config.getBoolean("Authentication.Commands.DenyCommand.Kick") == true) {
-                if (Authentication.config.getBoolean("Authentication.Commands.DenyCommand.MessageBeforeKick") == true) {
+            if (Authentication.config.getBoolean("Authentication.Commands.DenyCommand.Kick")) {
+                if (Authentication.config.getBoolean("Authentication.Commands.DenyCommand.MessageBeforeKick")) {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Commands.DenyCommand")));
                     Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Authentication.instance, new Runnable() {
                         public void run() {
                             player.kickPlayer(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Commands.Kick")));
                         }
                     }, Delay);
+                    
                     return true;
                 } else {
                     player.kickPlayer(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Commands..Kick")));
@@ -65,9 +68,10 @@ public class DenyCommand implements CommandExecutor {
             } else {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', Authentication.messages.getString("Authentication.Commands.DenyCommand")));
             }
+            
             return true;
         }
+        
         return false;
     }
-    
 }
